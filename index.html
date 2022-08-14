@@ -100,8 +100,8 @@
         //3. 将差值设置给元素
         function getGapTime(preData,curData){
             //思考，为什么下面不能给定初始值？
-            // let preData = new Date("2019-10-18 9:00:04");
-            // let curData = new Date("2020-8-27 11:40:00");
+            // let preData = new Date("2022-10-18 9:00:04");
+            // let curData = new Date("2022-9-10 11:40:00");
             let gapSeconds = (preData - curData)/1000;
             let day = parseInt(gapSeconds/(60*60*24));
             day = day >= 10? day : "0" + day;
