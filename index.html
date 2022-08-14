@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* 清除默认css样式 */
+        *{
+            margin: 0;  
+            padding: 0;
+        }
+        /* 设置div内的宽高、居中等样式 */
+        div{
+            margin:0 auto;
+            margin-top: 100px;
+            width: 600px;
+            height: 80px;
+            background-color: aqua;
+            font-size: 24px;
+            font-weight: 600;
+            color: red;
+            text-align: center;
+            line-height: 80px;
+        }
+        /* 设置span样式，显示时间的 */
+        span{
+            width: 32px;
+            height: 32px ;
+            background-color: rgba(253, 252, 252, 0.8);
+            border-radius:5px;
+            color: #ff6700;
+        }
+    </style>
+</head>
+<body>
+    <!-- 在div内写入文字，span用来放倒计时时间 -->
+    <div id="clock">距开学2022年9月1日还有
+    <span class="cl1">00</span>天
+    <span class="cl2">00</span>小时
+    <span class="cl3">00</span>分钟
+    <span class="cl4">00</span>秒
+</div>
+</body>
+<script>
+    //倒计时总思路：用未来时间-现在时间
+    // 定义倒计时函数
+    function Times(){
+    //先获取ID节点，写完后再将字符串插入到clock节点内部.innerHTML=
+    var clock=document.getElementById("clock");
+    //获取span节点
+    var spans=clock.getElementsByTagName("span") 
+    //引入当前时间
+    var today=new Date(); 
+    //设置未来时间
+    var enday=new Date("2022/9/1 00:00:00"); 
+    //未来时间-当前时间，出来毫秒数，用到哪在哪除，并给其定义赋值，方便后面取用，用parseInt()取整
+    var lastTime=parseInt((enday-today)/1000); 
+    //剩余天数，（未来时间-当前时间）/1000/60/60/24
+    var lastDate=parseInt(lastTime/60/60/24);  
+     //剩余小时，（未来时间-当前时间）/1000/60%24 用取余方法，取出天后面的余数就是小时数
+    var lastHour=parseInt(lastTime/60/60%24); 
+    //剩余分钟数，（未来时间-当前时间）/1000/60%60，小时后面的余数就是分钟数
+    var lastMin=parseInt(lastTime/60%60);
+    //剩余秒数，（未来时间-当前时间）/1000%60，分钟后的余数就是秒数
+    var lastSec=parseInt(lastTime%60);
+    // 让天数为10以下时前面加个0，增加用户体验。 有更好的方法，这种写法不推荐
+    if(lastDate<10){
+        lastDate="0"+lastDate;
+    }
+    // 让小时数为10以下时前面加个0，增加用户体验。 有更好的方法，这种写法不推荐
+    if(lastHour<10){
+        lastHour="0"+lastHour;
+    }
+    // 让分钟数为10以下时前面加个0，增加用户体验。 有更好的方法，这种写法不推荐
+    if(lastMin<10){
+        lastMin="0"+lastMin;
+    }
+    // 让秒数为10以下时前面加个0，增加用户体验。 有更好的方法，这种写法不推荐
+    if(lastSec<10){
+        lastSec="0"+lastSec;
+    }
+    // 选择span节点，把相应的时间添加进去，span后用数组选择，数组从0开始，0代表1
+    spans[0].innerHTML=lastDate;
+    spans[1].innerHTML=lastHour;
+    spans[2].innerHTML=lastMin;
+    spans[3].innerHTML=lastSec;
+    }
+    // 定义计时器，1000毫秒更新一次
+    setInterval("Times()",1000);
+
+
+    
+</script>
+</html>
